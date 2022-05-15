@@ -1,67 +1,6 @@
-<h3 style='color:#4444aa;'> Abstraction Test </h3> 
-
-<p> 
-    function <code> prog_make() </code> <br/>
-    class    <code> Attrib()    </code> 
-</p> 
-<canvas id='canvas'> </canvas>
-
-<script>
-
-let canvas = document.getElementById('canvas');
-let gl     = canvas.getContext('webgl2');
-
-let prog = Program( 
-`
-in float size;
-in vec2 pos;
-in vec3 color;
-
-out vec3 Color;
-
-void main()
-{
-	Color = color;
-	gl_PointSize = size;
-	gl_Position  = vec4(pos, 0., 1.);
-}`, 
-`in vec3 Color;
-out vec4 color_out;
-
-void main()
-{ 
-	color_out = vec4(Color, 1.);
-}`);
-
-num_pts = 40;
-
-let pos   = new Attrib(prog, 'pos',  2, random(-1,1, 2*num_pts));
-let size  = new Attrib(prog, 'size', 1, random( 1,20,1*num_pts));
-let color = new Attrib(prog, 'color',3, random( 0,1, 3*num_pts));
-
-gl.drawArrays(gl.POINTS, 0, num_pts);
-
-/*--------------------- 'Attrib' Class ---------------------------*/
-
-function Attrib(prog, loc, dim, data) {
-	this.data = new Float32Array(data);
-	this.buf  = gl.createBuffer();
-	this.loc  = gl.getAttribLocation(prog, loc);
-	
-	gl.bindBuffer(gl.ARRAY_BUFFER, this.buf);
-	gl.enableVertexAttribArray(this.loc);
-	gl.vertexAttribPointer(this.loc, dim, gl.FLOAT, false, 4*dim, 0);
-	gl.bufferData(gl.ARRAY_BUFFER, this.data, gl.STATIC_DRAW);
-	
-	this.update = () => {
-		gl.bindBuffer(gl.ARRAY_BUFFER, this.buf);
-		gl.bufferData(gl.ARRAY_BUFFER, this.data, gl.STATIC_DRAW);}}
-
-/*-------------------------- Prog-Make Fn ----------------------*/
-
 function Shader(vertex_code, fragment_code) {
 
-	/* Make a WebGL2 Shader
+    /* Make a WebGL2 Shader
 
 	   Input: vertex and fragment codes, minus the glsl 300 header
 
@@ -70,7 +9,7 @@ function Shader(vertex_code, fragment_code) {
 	      shader.(var)   = shader variable
 	      shader.(var)   = shader variable
 	      etc.
-	*/
+    */
 
     let shader = {};
     shader.program = gl.createProgram();
@@ -83,8 +22,8 @@ function Shader(vertex_code, fragment_code) {
     vertex_code   = "#version 300 es\n" + vertex_code;
     fragment_code = "#version 300 es\n" + fragment_code;
 
-    gl.shaderSource( fragment_shader, fragment_code);
     gl.shaderSource( vertex_shader,   vertex_code);
+    gl.shaderSource( fragment_shader, fragment_code);
     gl.compileShader(vertex_shader);     
     gl.compileShader(fragment_shader);  
 
@@ -93,7 +32,7 @@ function Shader(vertex_code, fragment_code) {
     gl.linkProgram(  shader.program); 
     gl.useProgram(   shader.program);  
 
-    // shader variables accessed in javascript by 
+    // retrieve attrib/uniform locations and store as
     // shader.(shader_variable_name)
 
     let attrib_count = gl.getProgramParameter(prog.program, gl.ACTIVE_ATTRIBUTES); 
@@ -120,14 +59,3 @@ function Shader(vertex_code, fragment_code) {
 
     return prog;
 }
-
-function random(low, high, n) {
-
-    let array = new Float32Array(n);
-
-    for (let i = 0; i < n; i++) {
-    	array[i] = low + (high-low)*Math.random();}
-    return array;
-}
-
-</script> <!-- $:\^$# -->
