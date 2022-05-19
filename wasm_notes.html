@@ -1,0 +1,106 @@
+<h1> Web Assembly Notes </h1>
+
+<h3> What is Wasm? </h3>
+<p>  Web Assembly is a new language for the web <br>
+	 It's a simple, safe abstraction of machine code 
+</p>
+<pre>
+Machine       Wasm            
+-------       ----               
+CPU           Stack Instructions 
+Cache         Local Variables
+RAM           Linear Memory
+</pre>
+
+<h3> Modules </h3>
+<p> Wasm is written in Modules of byte code <br>
+	Modules are made of sections
+</p>
+<pre>
+Section    ID   Purpose
+-------    --   -------
+Type       1    Define function input/output signature types
+Import     2    Import functions, tables, memories or globals
+Function   3    Declare function signature indices
+Table      4    Declare tables of function references
+Memory     5    Declare arrays of linear memory
+Global     6    Declare global variables
+Export     7    Export functions, tables, memories or globals
+Start      8    Select a function to run on start
+Element    9    Set initial Table Data
+Code       10   Declare function code and local variables
+Data       11   Set initial Memory Data
+</pre>
+
+<h3> Instructions </h3>
+<p> Wasm instructions run only within wasm functions <br>
+	Functions definitions span 3 sections <br>
+</p>
+<pre>
+Section   Defines
+-------   -------
+type      func signature input/output type
+import    func index and signature index (external func)
+func      func index and signature index (internal func)
+code      instructions and local variables for wasm functions
+</pre>
+
+<h3> Data </h3>
+<p> Wasm functions can read/write to <br>
+	&bullet; top of stack <br>
+	&bullet; local variables (params + locals)<br>
+	&bullet; global variables <br>
+	&bullet; linear memory 
+</p>
+<pre>
+Section   Defines
+-------   -------
+memory    how much linear memory to use
+data      initial data for linear memory
+type      input params are mutable local variables
+code      additional local variables
+global    global variables
+</pre>
+
+<h1> Links </h1>
+<p>
+	Here is the best <a href='https://webassembly.github.io/spec/core/intro/overview.html'>short overview</a> of wasm i've found <br>
+	It is part of the offical <a href='https://webassembly.github.io/spec/core/'>wasm specification</a> <br>
+	Here is a convenient <a href='https://webassembly.github.io/spec/core/appendix/index-instructions.html'> opcode table </a>
+</p>
+
+<!-- - - - - - - - - Style - - - - - -->
+<style> 
+
+html {
+	background-color:#555555;
+	font-family: sans-serif;
+}
+body {
+	margin:10px;
+	padding:10px;
+	background-color:#ffffff;
+	border:solid 1px #000000;
+	border-radius:5px;
+}
+h1, h3 {
+	background-color:white;
+	margin-bottom:5px;
+}
+p {
+	margin-top:1px;
+	background-color:white;
+	font-size:large;
+}
+pre {
+	margin-top:10px;
+	margin-bottom:20px;
+	padding:5px;
+	border: 1px solid #aaaaaa;
+	border-radius: 5px;
+	font-size: larger;
+	background-color:#f0f0f0;
+	margin-top:-1em;
+	margin-bottom:-1em;
+}
+</style>
