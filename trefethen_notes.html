@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset='utf-8'>
+ 	<link rel="stylesheet" href="katex.css">
+    <script defer src='katex.js'></script>
+    <script defer src='auto-render.js'
+    	onload="renderMathInElement(document.body, {output:'mathml'});">
+    </script>
+
+    <style>
+    	html{
+    		background-color:#f2f2f2;
+    		font-family: sans-serif;
+    	}
+    	body{ 
+    		background-color:#ffffff;
+    		margin-top:0px;
+    		margin-left:50px; 
+    		margin-right:30px;
+    	}
+    	header{
+    		top:0px;
+    		left:0px;
+    		margin-left:-50px; 
+    		margin-right:-30px;
+    		color:#cccccc;
+    		background-color:#222222;
+    		border-bottom: solid 1px #000000;
+    		text-align:center;
+    		font-size:20px;
+    	} 
+    	h1 {
+    		margin-left:30px;
+    		color:#222222;
+    	}
+    	h3 {
+    		margin-left:30px;
+    		color:#222255;
+    	}
+    	p {
+    		margin-left:30px;
+    	}
+    	div {
+    		padding-left:30px;
+    		font-size:smaller;
+    		background-color:#f0f2fc;
+    	}
+    </style>
+</head>
+<body>
+
+<header>
+	Notes on 'Numerical Linear Algebra' by Trefethen
+</header>
+
+<h1> Lecture 1: Matrix-Vector Multiplication </h1>
+
+<h3> Familiar Definitions </h3>
+<p>
+	let \(x\) be an \(n\)-dimensional vector 
+	<br>
+	\( \ \ \begin{bmatrix}
+	   x_1 \\
+	   x_j \\
+	   x_n
+	   \end{bmatrix}
+	\) 
+	<br>
+	let \(A\) be an \(m \times n \) matrix 
+	<br>
+	\( \ \ \begin{bmatrix}
+	   a_{11} & a_{1j} & a_{1n} \\
+	   a_{i1} & a_{ij} & a_{in} \\
+	   a_{m1} & a_{mj} & a_{mn}
+	   \end{bmatrix}
+	\) 
+	<br>
+	then \(b = Ax \) is 
+	<br>
+	\( \displaystyle b_i = \sum_{j=1}^n a_{ij} x_{j}, \ \ i = 1, ... , m
+	\)
+</p>
+
+<h3> Linearity </h3>
+<p>
+	the map \( x \rightarrow Ax \) is linear <br>
+	for any vectors \(x,y \ \epsilon \ C^n \) <br>
+	and any constant \(\alpha\) <br>
+	\( A(x + y) = Ax + Ay \) <br>
+	\( A(\alpha x) = \alpha A x \) 
+</p>
+
+<h3> Vandermonde Matrix </h3>
+
+<p>
+	let polynomial \( p(x) = c_0 + c_1 x + c_2 x^2 + ... c_{n-1}x^{n-1}\) <br>
+	to compute multiple samples	\( p(x_1) \), \( p(x_2) \), \( p(x_3) \) <br>
+
+	\( \begin{bmatrix}
+   		 p(x_1) \\
+   		 p(x_2) \\
+   		 p(x_3) 
+  	   \end{bmatrix}
+       = 
+	   \begin{bmatrix}
+   		 1 & x_1 & x_1^2 \\
+   		 1 & x_2 & x_2^2 \\
+   		 1 & x_3 & x_3^2
+  	   \end{bmatrix}
+  	   \begin{bmatrix}
+   		  c_0 \\
+   		  c_1 \\
+   		  c_2
+  	   \end{bmatrix}
+  	\)
+</p>
+<p>
+	So, the map \( c \to  p(x) \) is linear
+</p>
+<h3> A Matrix times a Matrix </h3>
+<p>
+	for matrices \( B = AC \) <br>
+	each column of \( B \) is a <br>
+	linear combination of the columns of \(A\)
+</p>
+
+<h3> Outer Product </h3>
+<p>
+</p>
+
+<h3> Discrete Indefinite Integral </h3>
+<p> An upper-triangular matrix of ones <br>
+
+</p>
+
+<h3> Range and Nullspace </h3>
+
+<h3> Inverse </h3>
+
+<h3> A Matrix Inverse times a Vector </h3>
+
+<h3> Mind your m's and n's </h3>
+
+<h1> Lecture 2: Orthogonal Vectors and Matrices </h1>
+<h3> Ancient Proverb </h3>
+<p> 
+	Since the 1960's <br>
+	many of the best algorithms <br>
+	of numerical linear algebra <br>
+	have been based <br>
+	in one way or another <br>
+	on orthogonality
+</p>
+<h3> Complex Bonus </h3>
+<p>
+	Most of these algorithms <br>
+	work on complex numbers <br>
+	as well as real numbers <br>
+	apparently
+</p>
+
+<h3> Adjoint </h3>
+<h3> Inner Product </h3>
+<h3> Orthogonal Vectors </h3>
+<p>
+	Vectors \(x,y\) are <b>orthogonal</b> if \(x^*y = 0\) <br>
+	If \(x,y \in \reals^m\), \(x \perp y \) <br>
+	If \(x,y\) have component lengths of 1, \(x,y\) are <b>orthonormal</b>
+
+<h3> Declaration of Linear Independence </h3>
+<p>
+	Vectors in an orthogonal set \(S\) are <b>linearly independent</b> <br>
+	normal space is like this <br>
+	if you move left, you don't also move a little up <br>
+	so, left if linearly independent of up
+</p>
+<h3> Components of a Vector </h3>
+
+
+<h1> Lecture 3: Norms </h1>
+
+<h1> Lecture 4: Singular Value Decomposition</h1>
+
+<h3>Ancient Proverb</h3> 
+<p>   
+	Many problems of linear algebra  <br>
+	can be better understood 	     <br>
+	if we first ask the question:    <br>
+	what if we take the SVD?
+</p>
+
+<h3> Hyperellipses and You </h3>
+<p> 
+	A <b>hyperellipse</b> is a m-dimensional generalization
+	of an ellipse
+	<br>
+	The image of the unit sphere under any 
+	\( m \times n \) matrix is a hyperellipse
+	<br>
+	<br>
+	To make a <b>hyperellipse</b> in \( \reals^m \) start with a unit sphere in \( \reals^m \)
+	<br>
+ 	Stretch by \( \sigma_1 \ , \ ... \ , \ \sigma_m \) 
+	along orthonormal vectors \( u_1, ... , u_m \in \reals^m \)
+	<br>
+	\( \{\sigma_i u_i\} \) are the <b>principal semi-axes</b> of the hyperellipse
+</p>
+
+<h3> Hyperellipses and Singular Values </h3>
+<p>
+	let \(S\) be the unit sphere \( S \in \reals^n \)
+	<br>
+	let \(A\) be a full rank matrix \( A \in \reals^{ m \times n} \)
+	<br>
+	the image \(AS\) is a hyperellipse in \( \reals^{m} \)
+</p>
+
+<h3> Singular Values </h3>
+<p>
+	... drum roll ... <br>
+
+	<b>Singular Values</b> of \(A\) = principal semiaxes lengths of \( AS \), written \( \sigma_1, \ ... \ , \sigma_n\)
+	<br>
+	<b>Left Singular Vectors</b>
+</p>
+
+<h3> Lecture 5: More on the SVD</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
