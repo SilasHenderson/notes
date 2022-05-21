@@ -1,16 +1,9 @@
-<!-- make some text and a canvas element -->
-
-<h1> Color Triangle! </h1>
-<p> Color Triangle with WebGL2 and a 'shader' and 'buffer' fn </p>
 <canvas id='canvas'> </canvas>
 
-<!-- start some javascript -->
 <script>
 
-// Load a drawing context for canvas element
 let gl = canvas.getContext('webgl2');
-
-// input triangle vertex positions and colors, output screen positions and colors
+	
 let vertex_code = 
 `
 in vec2 pos;
@@ -22,8 +15,7 @@ void main()
     frag_color  = vec4(color, 1.0);
     gl_Position = vec4(pos, 0.0, 1.0);
 }`;
-
-// for each fragment (like a pixel), output color for the fragment
+	
 let fragment_code = 
 `
 in vec4 frag_color;
