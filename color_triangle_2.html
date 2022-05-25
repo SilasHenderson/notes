@@ -1,0 +1,143 @@
+<canvas id='canvas'> </canvas>
+
+<script>
+
+let gl = canvas.getContext('webgl2');
+	
+let shader = Shader(
+`
+in vec2 pos;
+in ivec3 color;
+out vec4 fcolor;
+uniform float lite;
+
+void main() 
+{
+    fcolor = vec4(color, 1.0)*lite;
+    gl_Position = vec4(pos, 0.0, 1.0);
+}`,
+`
+in vec4 fcolor;
+out vec4 frag_color;
+
+void main()
+{ 
+    frag_color = fcolor;
+}`);
+
+shader.pos   = [-1,-1,  1,-1, 1,1];
+shader.color = [0,0,1, 0,1,0, 1,0,0];
+shader.lite  = 1;
+
+gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+/* ---------------------- Utility Functions ------------------- */
+
+function Shader(vertex_code, fragment_code) {
+
+    let shader = {
+    	program:  gl.createProgram(),
+    	attribs:  {},
+    	uniforms: {},
+    }
+    let vertex_shader   = gl.createShader(gl.VERTEX_SHADER);    
+    let fragment_shader = gl.createShader(gl.FRAGMENT_SHADER);
+
+    vertex_code   = "#version 300 es\n" + vertex_code;
+    fragment_code = "#version 300 es\n precision mediump float;\n" + fragment_code;
+
+    gl.shaderSource( vertex_shader,   vertex_code);
+    gl.shaderSource( fragment_shader, fragment_code);
+    gl.compileShader(vertex_shader);     
+    gl.compileShader(fragment_shader);  
+
+    gl.attachShader( shader.program, vertex_shader);
+    gl.attachShader( shader.program, fragment_shader);
+    gl.linkProgram(  shader.program); 
+    gl.useProgram(   shader.program);  
+
+    let attrib_info = {
+    	'5124':  {size: 1, type: gl.INT },   // int
+    	'35667': {size: 2, type: gl.INT },   // ivec2
+    	'35668': {size: 3, type: gl.INT },   // ivec3
+    	'35669': {size: 4, type: gl.INT },   // ivec4
+
+    	'5126':  {size: 1, type: gl.FLOAT }, // float
+    	'35664': {size: 2, type: gl.FLOAT }, // vec2
+    	'35665': {size: 3, type: gl.FLOAT }, // vec3
+    	'35666': {size: 4, type: gl.FLOAT }, // vec4
+    }
+    let attrib_count = gl.getProgramParameter(shader.program, gl.ACTIVE_ATTRIBUTES); 
+
+    for (let i = 0; i < attrib_count; i++) {
+
+    	let info = gl.getActiveAttrib( shader.program, i);
+    	let name = info.name;
+    	let type = info.type;
+
+    	shader.attribs[name] = {
+    		location:  gl.getAttribLocation(shader.program, name),
+    		type:      attrib_info[type].type,
+    		size:      attrib_info[type].size,      		
+       		buffer:    gl.createBuffer(),	
+       	}
+        gl.enableVertexAttribArray(shader.attribs[name].location);
+        
+        Object.defineProperty(shader, name, {
+
+        	set(array) {
+
+    	   		let size     = shader.attribs[name].size;
+    	   		let location = shader.attribs[name].location;
+    	   		let type     = shader.attribs[name].type;
+    	   		
+    	   		if (type == gl.FLOAT) array = new Float32Array(array);
+    	   		if (type == gl.INT)   array = new Int32Array(array);
+
+				gl.bindBuffer(gl.ARRAY_BUFFER, shader.attribs[name].buffer);
+				gl.bufferData(gl.ARRAY_BUFFER, array, gl.STATIC_DRAW);
+
+				if (type == gl.FLOAT) gl.vertexAttribPointer(location, size, type, false, 4*size, 0);
+				if (type == gl.INT)  gl.vertexAttribIPointer(location, size, type, 4*size, 0);
+       		}
+       	});
+    }
+
+    let uniform_setter = {
+    	'35676': (loc, val) => gl.uniformMatrix4fv(loc, false, val), // mat4
+    	'35675': (loc, val) => gl.uniformMatrix3fv(loc, false, val), // mat3
+    	'35674': (loc, val) => gl.uniformMatrix2fv(loc, false, val), // mat2
+    	'5126':  (loc, val) => gl.uniform1f(loc, val)                // float
+    }
+
+    let uniform_count = gl.getProgramParameter( shader.program, gl.ACTIVE_UNIFORMS);
+
+    for (let i = 0; i < uniform_count; i++) {  
+
+    	let info = gl.getActiveUniform(  shader.program, i);
+    	let name = info.name;
+    	let type = info.type;
+
+    	console.log(info);
+
+    	shader.uniforms[name] = {
+			location: gl.getUniformLocation(shader.program, name),
+			value:    null, 
+    	}
+
+        Object.defineProperty(shader, name, {
+        	set(val) {
+        		let loc = shader.uniforms[name].location
+        		uniform_setter[type](loc, val);
+        	}
+        })
+    }
+
+    console.log('vertex log',   gl.getShaderInfoLog(vertex_shader));
+    console.log('fragment log', gl.getShaderInfoLog(fragment_shader));
+    console.log('program log',  gl.getProgramInfoLog(shader.program));
+    console.log('shader object', shader);
+
+    return shader;
+}
+</script>
