@@ -75,28 +75,28 @@ function Shader(vertex_code, fragment_code) {
     	let info = gl.getActiveAttrib( shader.program, i);              
                                                                        
     	shader.attribs[info.name] = {                                    
-    		location:  gl.getAttribLocation(shader.program, info.name),  
-    		type:      attrib_info[info.type].type,                      
-    		size:      attrib_info[info.type].size,      	           
-       		buffer:    gl.createBuffer(),	                             
+    	    location:  gl.getAttribLocation(shader.program, info.name),  
+    	    type:      attrib_info[info.type].type,                      
+    	    size:      attrib_info[info.type].size,      	           
+       	    buffer:    gl.createBuffer(),	                             
        	}                                                               
         gl.enableVertexAttribArray(shader.attribs[info.name].location);  
         
         Object.defineProperty(shader, info.name, {
 
-        	set(array_data) {  
+            set(array_data) {  
 
-    	   		let a = shader.attribs[info.name];    
+    	        let a = shader.attribs[info.name];    
 
-    	   		if (a.type == gl.FLOAT) array_data = new Float32Array(array_data); 
-    	   		if (a.type == gl.INT)   array_data = new Int32Array(array_data);
+    	        if (a.type == gl.FLOAT) array_data = new Float32Array(array_data); 
+    	        if (a.type == gl.INT)   array_data = new Int32Array(array_data);
 
-				gl.bindBuffer(gl.ARRAY_BUFFER, a.buffer);                
-				gl.bufferData(gl.ARRAY_BUFFER, array_data, gl.STATIC_DRAW);   
+		gl.bindBuffer(gl.ARRAY_BUFFER, a.buffer);                
+		gl.bufferData(gl.ARRAY_BUFFER, array_data, gl.STATIC_DRAW);   
 																	
-				if (a.type == gl.FLOAT) gl.vertexAttribPointer(a.location, a.size, a.type, false, 4*a.size, 0);
-				if (a.type == gl.INT)  gl.vertexAttribIPointer(a.location, a.size, a.type, 4*a.size, 0);
-       		}
+		if (a.type == gl.FLOAT) gl.vertexAttribPointer(a.location, a.size, a.type, false, 4*a.size, 0);
+		if (a.type == gl.INT)  gl.vertexAttribIPointer(a.location, a.size, a.type, 4*a.size, 0);
+       	    }
        	});
     }
 
@@ -115,14 +115,14 @@ function Shader(vertex_code, fragment_code) {
     	console.log(info);
 
     	shader.uniforms[info.name] = {
-			location: gl.getUniformLocation(shader.program, info.name),
-			value:    null, 
+	    location: gl.getUniformLocation(shader.program, info.name),
+	    value:    null, 
     	}
         Object.defineProperty(shader, info.name, {
-        	set(val) {
-        		let loc = shader.uniforms[info.name].location
-        		uniform_setter[info.type](loc, val);
-        	}
+            set(val) {
+        	let loc = shader.uniforms[info.name].location
+        	uniform_setter[info.type](loc, val);
+            }
         })
     }
     console.log('vertex log',   gl.getShaderInfoLog(vertex_shader));
