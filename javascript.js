@@ -11,5 +11,5 @@
 "dog and dog".match(/dog/g)        // ['dog', 'dog'], global search flag
 "Fish and fish".match(/fish/gi)    // ['Fish', 'fish'], multiple flags
 "dog".match(/[a-z0-9]/)            // ['d', 'o', 'g'], search all letters and numbers within character set
-"3 blind mice".test(/[^a-z0-9]/ig) // [' ', ' ', '.']
+"3 blind mice.".test(/[^a-z0-9]/ig)// [' ', ' ', '.']
 "aabc".match(/a+/g)                // ['aa'], match character that appears one or more times in a row
