@@ -1,9 +1,5 @@
-// nullish = null or undefinied
-// Optional Chaining Operator: obj.undefined_prop returns undefined instead of error
+// Regex freecodecamp
 
-obj = Proxy(obj, {
-    get(obj, prop){
-    },
-    set(obj, prop, val){
-    }
-})
+/dog/.test(cat|dog)     // true, Alternation OR operator |
+/dog/i.test(Dog)        // true, ignore case flag i
+
