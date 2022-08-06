@@ -1,8 +1,21 @@
 // Basic JavaScript freecodecamp
 
+var a;                             // undeclared variables get type 'undefined'
 var a;                             // 8 data types: undefined, null, bool, string, symbol, bigint, number, object
 var a = 5;                         // Declare variable named 'a' and assign initial value '5' with assignment operator (=)
 var a = "banana"                   // a is of string type containing "banana" string literal
+
+NaN = 5/undefined                  // 'NaN' is a number type
+var thisIsCamelCase = "camel"      // camel-case
+
+function run(){                    
+   {
+       var a = 1;                   // 'var' scopes to enclosing function
+       let b = 2;                   // 'let' scopes to enclosing block
+   {
+   console.log(a) // 1
+   console.log(b) // error
+}
 
 // Regex freecodecamp
 
