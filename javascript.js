@@ -1,3 +1,9 @@
+// Basic JavaScript freecodecamp
+
+var a;                             // 8 data types: undefined, null, bool, string, symbol, bigint, number, object
+var a = 5;                         // Declare variable named 'a' and assign initial value '5' with assignment operator (=)
+var a = "banana"                   // a is of string type containing "banana" string literal
+
 // Regex freecodecamp
 
 /dog|cat/.test('dog')              // true, Alternation OR operator |
