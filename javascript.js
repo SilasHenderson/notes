@@ -8,6 +8,8 @@ var a = "banana"                   // a is of string type containing "banana" st
 NaN = 5/undefined                  // 'NaN' is a number type
 var thisIsCamelCase = "camel"      // camel-case
 
+/* 'VAR' VS. 'LET' */
+
 function run(){                    
    {
        var a = 1;                   // 'var' scopes to enclosing function
@@ -15,6 +17,9 @@ function run(){
    {
    console.log(a) // 1
    console.log(b) // error
+      
+   let c; let c;                    // 'let' can be declared only once: not valid
+   var d; var d;                    // 'var' can be declared more than once: valid
 }
 
 // Regex freecodecamp
