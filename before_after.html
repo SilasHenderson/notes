@@ -1,31 +1,32 @@
 <!doctype html>
-<!-- 
-	div::before {} and div::after {}
-	make children elements
-	at the beginning and end
-	of all divs
 
-	Here, we make 3 divs with content ' A ', ' B ', ' C '
-	and set all divs to 
-	prepend a red "before!" and
-	postpend a blue "after!""
+<!--  div::before {} and div::after {}
+      make children elements
+      at the beginning and end
+      of all divs
+
+      we make 3 divs with content ' A ', ' B ', ' C '
+      and set all divs to 
+      prepend a red "before!" and
+      postpend a blue "after!""
 -->
+
 <html>
-	<head>
-		<style>
-			div::before {
-				content: "before!";
-				color: red;
-			}
-			div::after {
-				content: "after!";
-				color: blue;
-			}
-		</style>
-	</head>
-	<body>
-		<div> A </div>
-		<div> B </div>
-		<div> C </div>
-	</body>
+  <head>
+    <style>
+      div::before {
+        content: "before!";
+        color: red;
+      }
+      div::after {
+        content: "after!";
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div> A </div>
+    <div> B </div>
+    <div> C </div>
+  </body>
 </html>
