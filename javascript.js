@@ -42,4 +42,4 @@ function run(){
 "3 blind mice.".match(/[^a-z0-9]/ig)// [' ', ' ', '.']
 "aabc".match(/a+/g)                // ['aa'], match character that appears one or more times in a row
 
-let ternary = condition : run_when_true ? run_when_false
+let ternary = condition : true ? false
