@@ -41,3 +41,5 @@ function run(){
 "dog".match(/[a-z0-9]/)            // ['d', 'o', 'g'], search all letters and numbers within character set
 "3 blind mice.".match(/[^a-z0-9]/ig)// [' ', ' ', '.']
 "aabc".match(/a+/g)                // ['aa'], match character that appears one or more times in a row
+
+let ternary = condition : run_when_true ? run_when_false
