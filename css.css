@@ -1,1 +1,8 @@
+What is up with all these colons in css?
+----------------------------------------
 
+/* https://css-tricks.com/to-double-colon-or-not-do-double-colon/ */
+/* https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors/Pseudo-classes_and_pseudo-elements */
+
+:   pseudo-class selector, applies class style to special situations (:hover, :first-child, etc.)
+::  pseudo-element selector, acts like adding a new element (::before, ::after, etc.)
