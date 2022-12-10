@@ -19,3 +19,6 @@ k_3 = dt*f(t_n + 1/2*dt, x_n + k_2)
 k_4 = dt*f(t_n + dt,     x_n + k_3)
 
 x_(n+1) = x_n + 1/6*(k_1 + 2*k_2 + 2*k_3 + k_4)
+
+N-body RK4 (https://prappleizer.github.io/Tutorials/RK4/RK4_Tutorial.html)
+----------
