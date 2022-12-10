@@ -1,4 +1,4 @@
-Second-Order Runge Kutta
+Second-Order Runge Kutta (https://youtu.be/C4UymmEi3Kw)
 ------------------------
 
 x_dot   = f(t, x);
