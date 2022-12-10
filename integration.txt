@@ -1,0 +1,21 @@
+Second-Order Runge Kutta
+------------------------
+
+x_dot   = f(t, x);
+k_1     = dt*f(t_n, x_n)
+k_2     = dt*f(t_n + A*dt, x_n + B*k_1)
+x_(n+1) = x_n + a*k_1 + b*k_2
+
+a + b   = 1
+A * b   = 1/2
+B * b   = 1/2
+
+RK4 (https://youtu.be/40NvJNrmHhw)
+---
+
+k_1 = dt*f(t_n, x_n)
+k_2 = dt*f(t_n + 1/2*dt, x_n + k_1)
+k_3 = dt*f(t_n + 1/2*dt, x_n + k_2)
+k_4 = dt*f(t_n + dt,     x_n + k_3)
+
+x_(n+1) = x_n + 1/6*(k_1 + 2*k_2 + 2*k_3 + k_4)
